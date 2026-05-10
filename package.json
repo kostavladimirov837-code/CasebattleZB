@@ -1,24 +1,14 @@
 {
   "name": "casebattlezb",
   "version": "1.0.0",
-  "description": "CaseBattle full-stack app with Vue and Express",
-  "main": "server/index.js",
+  "description": "CaseBattle frontend-only app with Vue",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "nodemon server/index.js",
-    "client": "npm run dev --prefix client",
+    "dev": "npm run dev --prefix client",
     "build": "npm run build --prefix client",
-    "start": "node server/index.js"
+    "preview": "npm run preview --prefix client"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "bcryptjs": "^3.0.3",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3",
-    "sqlite3": "^5.1.7"
-  }
+  "license": "ISC"
 }

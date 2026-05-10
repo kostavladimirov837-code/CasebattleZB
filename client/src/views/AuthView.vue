@@ -36,7 +36,7 @@ async function submit() {
   <section class="auth-container">
     <div class="auth-card neo-card">
       <h1 class="neo-title">CaseBattle</h1>
-      <p class="neo-muted">Вход и регистрация через внутреннюю базу данных</p>
+      <p class="neo-muted">Вход и регистрация в локальном режиме (без сервера)</p>
 
       <div class="tabs">
         <button class="cb-btn cb-btn-ghost" :class="{ active: mode === 'login' }" @click="mode = 'login'">Вход</button>
