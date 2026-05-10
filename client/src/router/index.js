@@ -9,7 +9,7 @@ import UpgradeView from "../views/UpgradeView.vue";
 import ContestsView from "../views/ContestsView.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/auth", name: "auth", component: AuthView },
     { path: "/", redirect: "/cases" },
