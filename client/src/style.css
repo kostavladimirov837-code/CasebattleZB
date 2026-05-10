@@ -554,3 +554,15 @@ select {
 .case-open-actions {
   margin-top: 12px;
 }
+
+.case-decision {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.case-decision-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

@@ -14,6 +14,9 @@ const spinning = ref(false);
 const finished = ref(false);
 const errorMessage = ref("");
 const openResult = ref(null);
+const decisionDone = ref(false);
+const instantActionLoading = ref(false);
+const decisionMessage = ref("");
 const reelItems = ref([]);
 const offset = ref(0);
 const spinnerViewport = ref(null);
@@ -21,6 +24,9 @@ const ITEM_WIDTH = 164;
 const ITEM_GAP = 12;
 
 const canOpen = computed(() => !!caseData.value && !spinning.value);
+const canDecide = computed(
+  () => finished.value && openResult.value && !decisionDone.value && !instantActionLoading.value
+);
 
 function normalizeItem(item, idx) {
   return {
@@ -78,6 +84,8 @@ async function openCase() {
   spinning.value = true;
   finished.value = false;
   errorMessage.value = "";
+  decisionMessage.value = "";
+  decisionDone.value = false;
   openResult.value = null;
   offset.value = 0;
 
@@ -105,6 +113,33 @@ async function openCase() {
     errorMessage.value = error.response?.data?.message || "Ошибка открытия кейса";
     spinning.value = false;
   }
+}
+
+async function sellWonItem() {
+  if (!canDecide.value) return;
+  const inventoryItemId = Number(openResult.value?.inventoryItemId);
+  if (!inventoryItemId) {
+    errorMessage.value = "Не удалось продать предмет";
+    return;
+  }
+  instantActionLoading.value = true;
+  errorMessage.value = "";
+  try {
+    const response = await api.post(`/inventory/${inventoryItemId}/sell`);
+    auth.user = response.data.user;
+    decisionDone.value = true;
+    decisionMessage.value = `Скин продан за ${response.data.sold.value} ₽`;
+  } catch (error) {
+    errorMessage.value = error.response?.data?.message || "Ошибка продажи скина";
+  } finally {
+    instantActionLoading.value = false;
+  }
+}
+
+function keepWonItem() {
+  if (!canDecide.value) return;
+  decisionDone.value = true;
+  decisionMessage.value = "Скин оставлен в инвентаре";
 }
 
 onMounted(async () => {
@@ -159,6 +194,18 @@ onMounted(async () => {
         <p>{{ openResult.items[0].name }} ({{ openResult.items[0].value }} ₽)</p>
         <p>Потрачено: {{ openResult.spent }} ₽</p>
         <p>Профит: {{ openResult.profit }} ₽</p>
+        <div v-if="!decisionDone" class="case-decision">
+          <p class="neo-muted">Что сделать со скином?</p>
+          <div class="case-decision-actions">
+            <button class="cb-btn cb-btn-primary" :disabled="!canDecide" @click="sellWonItem">
+              {{ instantActionLoading ? "Продаем..." : "Продать сразу" }}
+            </button>
+            <button class="cb-btn cb-btn-ghost" :disabled="!canDecide" @click="keepWonItem">
+              Оставить в инвентаре
+            </button>
+          </div>
+        </div>
+        <p v-else class="neo-success">{{ decisionMessage }}</p>
       </div>
 
       <p v-if="errorMessage && caseData" class="error">{{ errorMessage }}</p>

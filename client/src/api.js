@@ -236,6 +236,7 @@ const api = {
           spent: totalPrice,
           won: won.value,
           profit: won.value - totalPrice,
+          inventoryItemId: invItem.id,
           items: [won],
           user: state.user
         }
