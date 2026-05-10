@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 import AuthView from "../views/AuthView.vue";
 import CasesView from "../views/CasesView.vue";
+import CaseOpenView from "../views/CaseOpenView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import SellView from "../views/SellView.vue";
 import UpgradeView from "../views/UpgradeView.vue";
@@ -13,6 +14,7 @@ const router = createRouter({
     { path: "/auth", name: "auth", component: AuthView },
     { path: "/", redirect: "/cases" },
     { path: "/cases", name: "cases", component: CasesView },
+    { path: "/cases/:id/open", name: "case-open", component: CaseOpenView },
     { path: "/profile", name: "profile", component: ProfileView },
     { path: "/sell", name: "sell", component: SellView },
     { path: "/upgrade", name: "upgrade", component: UpgradeView },

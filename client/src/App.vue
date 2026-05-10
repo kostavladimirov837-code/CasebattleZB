@@ -23,16 +23,16 @@ function logout() {
 <template>
   <div class="app-layout">
     <header class="topbar" v-if="!isAuthPage">
-      <div>
-        <strong>CaseBattle</strong>
+      <div class="brand-wrap">
+        <strong class="brand-logo">CASEBATTLE</strong>
       </div>
       <nav class="main-nav">
         <RouterLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</RouterLink>
       </nav>
       <div class="user-info">
-        <span>{{ auth.user?.username }}</span>
-        <span>Баланс: {{ auth.user?.balance ?? 0 }} ₽</span>
-        <button @click="logout">Выйти</button>
+        <span class="user-chip">{{ auth.user?.username }}</span>
+        <span class="user-chip">Баланс: {{ Number(auth.user?.balance ?? 0).toFixed(2) }} ₽</span>
+        <button class="cb-btn cb-btn-primary" @click="logout">Выйти</button>
       </div>
     </header>
     <main>

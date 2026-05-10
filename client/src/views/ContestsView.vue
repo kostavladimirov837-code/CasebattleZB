@@ -45,21 +45,21 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="dashboard">
-    <h2>Конкурсы</h2>
-    <p v-if="message">{{ message }}</p>
+  <section class="dashboard neo-page">
+    <h2 class="neo-title">Конкурсы</h2>
+    <p v-if="message" class="neo-success">{{ message }}</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
     <div class="cases-grid">
-      <div v-for="contest in contests" :key="contest.id" class="panel">
+      <div v-for="contest in contests" :key="contest.id" class="panel neo-card">
         <h3>{{ contest.title }}</h3>
         <p>Билет: {{ contest.ticketPrice }} ₽</p>
         <p>Приз: {{ contest.prize }} ₽</p>
         <p>Участников: {{ contest.participants }}</p>
-        <button :disabled="contest.joined" @click="joinContest(contest.id)">
+        <button class="cb-btn cb-btn-primary" :disabled="contest.joined" @click="joinContest(contest.id)">
           {{ contest.joined ? "Вы участвуете" : "Участвовать" }}
         </button>
-        <button @click="drawContest(contest.id)">Разыграть</button>
+        <button class="cb-btn cb-btn-ghost" @click="drawContest(contest.id)">Разыграть</button>
       </div>
     </div>
   </section>

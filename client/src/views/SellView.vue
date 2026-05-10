@@ -40,17 +40,17 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="dashboard">
-    <h2>Продажа скинов</h2>
-    <p>Продавайте скины из инвентаря и пополняйте баланс.</p>
-    <p v-if="message">{{ message }}</p>
+  <section class="dashboard neo-page">
+    <h2 class="neo-title">Продажа скинов</h2>
+    <p class="neo-muted">Продавайте скины из инвентаря и пополняйте баланс.</p>
+    <p v-if="message" class="neo-success">{{ message }}</p>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <div class="panel">
+    <div class="panel neo-card">
       <ul>
         <li v-for="item in inventory" :key="item.id" class="inventory-row">
           <span>{{ item.item_name }} ({{ item.value }} ₽)</span>
-          <button :disabled="sellingId === item.id || sellingId !== null" @click="sellItem(item.id)">
+          <button class="cb-btn cb-btn-primary" :disabled="sellingId === item.id || sellingId !== null" @click="sellItem(item.id)">
             {{ sellingId === item.id ? "Продаем..." : "Продать" }}
           </button>
         </li>

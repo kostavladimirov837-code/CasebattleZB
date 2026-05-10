@@ -37,24 +37,24 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="dashboard">
-    <h2>Личный кабинет</h2>
-    <div class="panel">
+  <section class="dashboard neo-page">
+    <h2 class="neo-title">Личный кабинет</h2>
+    <div class="panel neo-card">
       <p><strong>Пользователь:</strong> {{ auth.user?.username }}</p>
-      <p><strong>Баланс:</strong> {{ auth.user?.balance ?? 0 }} ₽</p>
+      <p><strong>Баланс:</strong> {{ Number(auth.user?.balance ?? 0).toFixed(2) }} ₽</p>
       <p><strong>Скинов в инвентаре:</strong> {{ inventoryCount }}</p>
     </div>
 
-    <div class="topup">
-      <h3>Пополнить баланс</h3>
+    <div class="topup neo-card">
+      <h3 class="neo-subtitle">Пополнить баланс</h3>
       <input v-model.number="topupAmount" type="number" min="1" />
-      <button @click="topup">Пополнить</button>
-      <p v-if="message">{{ message }}</p>
+      <button class="cb-btn cb-btn-primary" @click="topup">Пополнить</button>
+      <p v-if="message" class="neo-success">{{ message }}</p>
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
     </div>
 
-    <div class="panel">
-      <h3>История открытий</h3>
+    <div class="panel neo-card">
+      <h3 class="neo-subtitle">История открытий</h3>
       <ul>
         <li v-for="item in history" :key="item.id">
           {{ item.case_name }} -> {{ item.item_name }} ({{ item.item_value }} ₽)

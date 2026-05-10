@@ -34,19 +34,19 @@ async function submit() {
 
 <template>
   <section class="auth-container">
-    <div class="auth-card">
-      <h1>CaseBattle</h1>
-      <p>Вход и регистрация через внутреннюю базу данных</p>
+    <div class="auth-card neo-card">
+      <h1 class="neo-title">CaseBattle</h1>
+      <p class="neo-muted">Вход и регистрация через внутреннюю базу данных</p>
 
       <div class="tabs">
-        <button :class="{ active: mode === 'login' }" @click="mode = 'login'">Вход</button>
-        <button :class="{ active: mode === 'register' }" @click="mode = 'register'">Регистрация</button>
+        <button class="cb-btn cb-btn-ghost" :class="{ active: mode === 'login' }" @click="mode = 'login'">Вход</button>
+        <button class="cb-btn cb-btn-ghost" :class="{ active: mode === 'register' }" @click="mode = 'register'">Регистрация</button>
       </div>
 
       <form @submit.prevent="submit" class="auth-form">
         <input v-model.trim="form.username" type="text" placeholder="Логин" required />
         <input v-model="form.password" type="password" placeholder="Пароль (минимум 6 символов)" required />
-        <button type="submit" :disabled="loading">
+        <button class="cb-btn cb-btn-primary" type="submit" :disabled="loading">
           {{ loading ? "Загрузка..." : mode === "login" ? "Войти" : "Создать аккаунт" }}
         </button>
       </form>

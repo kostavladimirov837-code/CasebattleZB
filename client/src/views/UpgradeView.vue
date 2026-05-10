@@ -39,9 +39,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="dashboard">
-    <h2>Апгрейды</h2>
-    <div class="panel">
+  <section class="dashboard neo-page">
+    <h2 class="neo-title">Апгрейды</h2>
+    <div class="panel neo-card">
       <label>Скин для апгрейда:</label>
       <select v-model="selectedItemId">
         <option :value="null" disabled>Выберите предмет</option>
@@ -58,18 +58,18 @@ onMounted(async () => {
         <option :value="5">x5</option>
       </select>
 
-      <button @click="upgrade">Запустить апгрейд</button>
+      <button class="cb-btn cb-btn-primary" @click="upgrade">Запустить апгрейд</button>
     </div>
 
-    <div class="result-card" v-if="result">
+    <div class="result-card neo-card" v-if="result">
       <p>Шанс: {{ Math.round(result.chance * 100) }}%</p>
       <p v-if="result.success">Успех! Новый скин: {{ result.reward.item_name }} ({{ result.reward.value }} ₽)</p>
       <p v-else class="error">Неудача: скин сгорел</p>
     </div>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
-    <div class="panel">
-      <h3>История апгрейдов</h3>
+    <div class="panel neo-card">
+      <h3 class="neo-subtitle">История апгрейдов</h3>
       <ul>
         <li v-for="item in history" :key="item.id">
           {{ item.source_item_name }} x{{ item.multiplier }} ->
