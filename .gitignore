@@ -1,0 +1,9 @@
+node_modules/
+client/node_modules/
+client/dist/
+# Локальная выгрузка под Pages из ветки /docs: npm run pages:export → при необходимости git add -f docs/
+docs/
+server/casebattle.db
+.env
+.DS_Store
+Thumbs.db

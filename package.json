@@ -1,0 +1,15 @@
+{
+  "name": "casebattlezb",
+  "version": "1.0.0",
+  "description": "CaseBattle frontend-only app with Vue",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client",
+    "pages:export": "npm run build --prefix client -- --base=/CasebattleZB/ --outDir=../docs && node -e \"require('fs').writeFileSync('docs/.nojekyll','')\""
+  },
+  "keywords": [],
+  "author": "Jwiqen",
+  "license": "ISC"
+}
